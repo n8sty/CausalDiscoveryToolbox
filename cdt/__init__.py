@@ -24,6 +24,10 @@ It is CUDA-compatible for the most computationally expensive algorithms.
 .. OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 .. SOFTWARE.
 """
+import logging
+
+logging.getLogger(__name__).addHandler(logging.NullHandler())
+logging.captureWarnings(True)
 
 import cdt.causality
 import cdt.independence
