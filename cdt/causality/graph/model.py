@@ -25,7 +25,11 @@ Date : 7/06/2017
 .. OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 .. SOFTWARE.
 """
+import logging
+
 import networkx as nx
+
+log = logging.getLogger(__name__)
 
 
 class GraphModel(object):
@@ -66,8 +70,11 @@ class GraphModel(object):
         elif isinstance(graph, nx.Graph):
             return self.orient_undirected_graph(df_data, graph, **kwargs)
         else:
-            print('Unknown Graph type')
-            raise ValueError
+            try:
+                raise ValueError('Unknown Graph type')
+            except ValueError as e:
+                log.exception(e.args[0])
+                raise
 
     def orient_undirected_graph(self, data, umg, **kwargs):
         """Orient an undirected graph.
